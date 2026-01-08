@@ -1,0 +1,22 @@
+[Unit]
+Description=OVOS MCP Server - FastMCP server exposing OpenVoiceOS skills
+Documentation=https://github.com/OpenVoiceOS/ovos-skill-mcp
+After=network.target ovos.service
+
+[Service]
+Type=simple
+ExecStart=%h/.venvs/ovos/bin/ovos-mcp-server
+Restart=on-failure
+RestartSec=5
+
+# Environment variables (uncomment and modify as needed)
+#Environment=OVOS_BUS_HOST=localhost
+#Environment=OVOS_BUS_PORT=8181
+#Environment=OVOS_BUS_ROUTE=/core
+#Environment=OVOS_BUS_SSL=false
+
+# Or use an environment file
+#EnvironmentFile=%h/.config/ovos-mcp-server/env
+
+[Install]
+WantedBy=default.target
