@@ -5,7 +5,7 @@ After=network.target ovos.service
 
 [Service]
 Type=simple
-ExecStart=%h/.venvs/ovos/bin/ovos-mcp-server
+ExecStart=%h/.venvs/ovos/bin/ovos-mcp-server --port 5002
 Restart=on-failure
 RestartSec=5
 
