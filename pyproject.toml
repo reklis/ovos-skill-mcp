@@ -51,7 +51,7 @@ Repository = "https://github.com/OpenVoiceOS/ovos-skill-mcp"
 Issues = "https://github.com/OpenVoiceOS/ovos-skill-mcp/issues"
 
 [project.scripts]
-ovos-mcp-server = "ovos_skill_mcp.server:run_server"
+ovos-mcp-server = "ovos_skill_mcp.server:main"
 
 [build-system]
 requires = ["hatchling"]

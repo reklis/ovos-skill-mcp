@@ -189,17 +189,51 @@ def run_server(
     mcp.run(transport=transport, host=host, port=port)
 
 
-if __name__ == "__main__":
+def main() -> None:
+    """CLI entry point for ovos-mcp-server."""
     import argparse
 
-    parser = argparse.ArgumentParser(description="OVOS MCP Server")
-    parser.add_argument("--host", default="0.0.0.0", help="HTTP server host")
-    parser.add_argument("--port", type=int, default=8000, help="HTTP server port")
-    parser.add_argument("--transport", default="http", choices=["http", "sse", "stdio"])
-    parser.add_argument("--bus-host", default="localhost", help="OVOS bus host")
-    parser.add_argument("--bus-port", type=int, default=8181, help="OVOS bus port")
+    parser = argparse.ArgumentParser(
+        description="OVOS MCP Server - Expose OpenVoiceOS skills via HTTP streaming"
+    )
+    parser.add_argument(
+        "--host",
+        default="0.0.0.0",
+        help="HTTP server host address (default: 0.0.0.0)",
+    )
+    parser.add_argument(
+        "--port",
+        type=int,
+        default=8000,
+        help="HTTP server port (default: 8000)",
+    )
+    parser.add_argument(
+        "--transport",
+        default="http",
+        choices=["http", "sse", "stdio"],
+        help="Transport type (default: http)",
+    )
+    parser.add_argument(
+        "--bus-host",
+        default="localhost",
+        help="OVOS message bus host (default: localhost)",
+    )
+    parser.add_argument(
+        "--bus-port",
+        type=int,
+        default=8181,
+        help="OVOS message bus port (default: 8181)",
+    )
+    parser.add_argument(
+        "--debug",
+        action="store_true",
+        help="Enable debug logging",
+    )
 
     args = parser.parse_args()
+
+    if args.debug:
+        logging.basicConfig(level=logging.DEBUG)
 
     run_server(
         host=args.host,
@@ -208,3 +242,7 @@ if __name__ == "__main__":
         bus_host=args.bus_host,
         bus_port=args.bus_port,
     )
+
+
+if __name__ == "__main__":
+    main()
